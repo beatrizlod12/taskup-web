@@ -1,0 +1,19 @@
+form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+td,
+th {
+  border-bottom: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+.erro {
+  color: #b00020;
+}
