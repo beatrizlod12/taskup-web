@@ -8,6 +8,7 @@ export interface ProdutoModel {
   nome: string;
   preco: number;
   quantidade: number;
+  ativo?: boolean;
 }
 
 @Injectable({
@@ -22,6 +23,14 @@ export class Produto {
     return this.http.get<ProdutoModel[]>(this.apiUrl);
   }
 
+  pesquisar(nome: string): Observable<ProdutoModel[]> {
+    return this.http.get<ProdutoModel[]>(this.apiUrl, { params: { nome } });
+  }
+
+  estoqueBaixo(limite: number): Observable<ProdutoModel[]> {
+    return this.http.get<ProdutoModel[]>(`${this.apiUrl}/estoque-baixo`, { params: { limite } });
+  }
+
   buscarPorId(id: number): Observable<ProdutoModel> {
     return this.http.get<ProdutoModel>(`${this.apiUrl}/${id}`);
   }
@@ -32,6 +41,18 @@ export class Produto {
 
   atualizar(id: number, produto: ProdutoModel): Observable<ProdutoModel> {
     return this.http.put<ProdutoModel>(`${this.apiUrl}/${id}`, produto);
+  }
+
+  ajustarEstoque(id: number, quantidade: number): Observable<ProdutoModel> {
+    return this.http.patch<ProdutoModel>(`${this.apiUrl}/${id}/estoque`, { quantidade });
+  }
+
+  inativar(id: number): Observable<ProdutoModel> {
+    return this.http.patch<ProdutoModel>(`${this.apiUrl}/${id}/inativar`, {});
+  }
+
+  ativar(id: number): Observable<ProdutoModel> {
+    return this.http.patch<ProdutoModel>(`${this.apiUrl}/${id}/ativar`, {});
   }
 
   deletar(id: number): Observable<void> {
