@@ -1,0 +1,127 @@
+<div class="vendas">
+  @if (mensagem()) {
+    <div class="aviso" [class.erro]="erro()">{{ mensagem() }}</div>
+  }
+
+  <div class="topo">
+    <!-- Produtos -->
+    <section class="painel">
+      <h2>Produtos disponíveis</h2>
+      <input
+        class="campo"
+        placeholder="Pesquisar produto..."
+        [ngModel]="busca()"
+        (ngModelChange)="busca.set($event)"
+      />
+
+      <div class="grade">
+        @for (p of produtosFiltrados(); track p.id) {
+          <div class="produto">
+            <div class="nome">{{ p.nome }}</div>
+            <div class="preco">{{ brl(p.preco) }}</div>
+
+            @if (p.quantidade === 0) {
+              <div class="estoque sem">Sem estoque</div>
+              <button class="btn" disabled>Indisponível</button>
+            } @else {
+              <div class="estoque" [class.baixo]="p.quantidade <= 5">
+                Disponível: {{ disponivel(p) }}
+                @if (p.quantidade <= 5) {
+                  · ⚠ estoque baixo
+                }
+              </div>
+              <button class="btn" [disabled]="disponivel(p) <= 0" (click)="adicionar(p)">
+                + Adicionar
+              </button>
+            }
+          </div>
+        } @empty {
+          <p class="vazio">Nenhum produto encontrado.</p>
+        }
+      </div>
+    </section>
+
+    <!-- Pedido -->
+    <aside class="pedido">
+      <h2>🛒 Pedido</h2>
+
+      @for (i of itensPedido(); track i.produto.id) {
+        <div class="linha">
+          <span>
+            <button class="mini" (click)="remover(i.produto)">−</button>
+            {{ i.quantidade }}x {{ i.produto.nome }}
+          </span>
+          <span>{{ brl(i.subtotal) }}</span>
+        </div>
+      } @empty {
+        <p class="vazio">Nenhum item adicionado.</p>
+      }
+
+      <div class="total">
+        <span>Total</span><span>{{ brl(total()) }}</span>
+      </div>
+
+      <div class="rotulo">Forma de pagamento</div>
+      <div class="pagamentos">
+        @for (f of ['PIX', 'DINHEIRO', 'CARTAO']; track f) {
+          <button
+            class="opcao"
+            [class.ativa]="formaPagamento() === f"
+            (click)="formaPagamento.set(f)"
+          >
+            {{ f === 'CARTAO' ? 'Cartão' : f === 'DINHEIRO' ? 'Dinheiro' : 'PIX' }}
+          </button>
+        }
+      </div>
+
+      <button class="btn grande" [disabled]="enviando()" (click)="finalizar()">
+        {{ enviando() ? 'Enviando...' : 'Finalizar venda' }}
+      </button>
+      <button class="link" (click)="limpar()">Limpar pedido</button>
+    </aside>
+  </div>
+
+  <!-- Histórico -->
+  <section class="painel historico">
+    <h2>Histórico de vendas</h2>
+    <div class="tabela">
+      <table>
+        <thead>
+          <tr>
+            <th>Nº</th>
+            <th>Data</th>
+            <th>Produtos</th>
+            <th>Pagamento</th>
+            <th>Status</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (v of vendas(); track v.id) {
+            <tr>
+              <td>{{ v.id }}</td>
+              <td>{{ data(v.dataHora) }}</td>
+              <td>{{ resumoItens(v) }}</td>
+              <td>{{ v.formaPagamento }}</td>
+              <td>
+                @if (v.statusPagamento === 'PAGO') {
+                  <span class="tag pago">✔ Pago</span>
+                } @else {
+                  <span class="tag pendente">⏳ Aguardando</span>
+                  <button class="link" (click)="confirmarPagamento(v)">Confirmar pagamento</button>
+                }
+              </td>
+              <td>
+                <b>{{ brl(v.valorTotal) }}</b>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="6" class="vazio">Nenhuma venda registrada ainda.</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>

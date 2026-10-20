@@ -1,1 +1,27 @@
-<app-lista-produtos />
+<header class="topo">
+  <div class="marca">
+    <span class="logo">🛒</span>
+    <div>
+      <h1>Mousseomanos</h1>
+      <p>Controle de estoque para vendedores ambulantes</p>
+    </div>
+  </div>
+  <span class="status-api">● API no Azure</span>
+</header>
+
+<div class="corpo">
+  <aside class="sidebar">
+    <nav class="menu">
+      <a routerLink="/estoque" routerLinkActive="ativo">
+        <span class="icone">📦</span> <span>Estoque</span>
+      </a>
+      <a routerLink="/vendas" routerLinkActive="ativo">
+        <span class="icone">🧾</span> <span>Vendas</span>
+      </a>
+    </nav>
+  </aside>
+
+  <main class="conteudo">
+    <router-outlet />
+  </main>
+</div>

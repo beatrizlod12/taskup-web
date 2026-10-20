@@ -39,9 +39,9 @@
 }
 
 .conteudo {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 32px 24px 48px;
+  max-width: none;
+  margin: 0;
+  padding: 32px;
 }
 
 /* Cartões de resumo */

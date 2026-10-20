@@ -1,0 +1,118 @@
+/* ---------- Faixa do topo ---------- */
+.topo {
+  background: #2b1e1a;
+  color: #fbf6ef;
+  padding: 18px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 30;
+}
+.marca {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.logo {
+  font-size: 34px;
+}
+.marca h1 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 26px;
+  margin: 0;
+}
+.marca p {
+  margin: 2px 0 0;
+  color: #e9dccf;
+  font-size: 14px;
+}
+.status-api {
+  background: rgba(232, 161, 90, 0.15);
+  color: #e8a15a;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* ---------- Menu lateral + página ---------- */
+.corpo {
+  display: flex;
+  min-height: calc(100vh - 78px);
+  background: #fbf6ef;
+}
+
+.sidebar {
+  width: 200px;
+  flex-shrink: 0;
+  background: #2b1e1a;
+  padding: 16px 12px;
+  border-top: 1px solid #ffffff14;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  position: sticky;
+  top: 94px;
+}
+.menu a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  color: #e8d9cf;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.15s;
+}
+.menu a:hover {
+  background: #ffffff14;
+}
+.menu a.ativo {
+  background: #a3510f;
+  color: #fff;
+}
+.icone {
+  font-size: 18px;
+}
+
+.conteudo {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ---------- Celular / WebView ---------- */
+@media (max-width: 800px) {
+  .topo {
+    padding: 12px 16px;
+  }
+  .marca p,
+  .status-api {
+    display: none;
+  }
+  .marca h1 {
+    font-size: 20px;
+  }
+
+  .corpo {
+    flex-direction: column;
+  }
+  .sidebar {
+    width: 100%;
+    padding: 8px 12px;
+  }
+  .menu {
+    flex-direction: row;
+    position: static;
+  }
+  .menu a {
+    flex: 1;
+    justify-content: center;
+    padding: 10px;
+  }
+}

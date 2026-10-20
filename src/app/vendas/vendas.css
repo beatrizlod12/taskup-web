@@ -1,0 +1,228 @@
+.vendas {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 32px;
+}
+.topo {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 24px;
+  align-items: start;
+}
+
+.painel,
+.pedido {
+  background: #fff;
+  border: 1px solid #eadfd3;
+  border-radius: 16px;
+  padding: 24px;
+}
+.pedido {
+  background: #fff3e8;
+  position: sticky;
+  top: 16px;
+}
+
+h2 {
+  font-size: 26px;
+  color: #2b1e1a;
+  margin: 0 0 16px;
+}
+
+.campo {
+  width: 100%;
+  max-width: 340px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  border: 1px solid #e3cdb8;
+  border-radius: 10px;
+  background: #fbf6ef;
+  font-size: 16px;
+}
+
+.grade {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 14px;
+}
+
+.produto {
+  border: 1px solid #eadfd3;
+  border-radius: 12px;
+  padding: 16px;
+}
+.nome {
+  font-weight: 700;
+  font-size: 17px;
+  color: #2b1e1a;
+}
+.preco {
+  color: #444;
+  margin: 4px 0;
+}
+.estoque {
+  font-size: 13px;
+  color: #2e7d32;
+  margin-bottom: 10px;
+}
+.estoque.baixo {
+  color: #e65100;
+}
+.estoque.sem {
+  color: #c62828;
+}
+
+.btn {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  background: #a3510f;
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+}
+.btn:disabled {
+  background: #e0d3c8;
+  color: #8d6e63;
+  cursor: not-allowed;
+}
+.btn.grande {
+  padding: 14px;
+  font-size: 16px;
+  margin-top: 4px;
+}
+
+.linha {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px dashed #e0c9b5;
+  font-size: 15px;
+}
+.mini {
+  width: 24px;
+  height: 24px;
+  margin-right: 6px;
+  border: 1px solid #d7b89f;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+}
+.total {
+  display: flex;
+  justify-content: space-between;
+  font-size: 22px;
+  font-weight: 800;
+  margin: 16px 0;
+}
+
+.rotulo {
+  font-size: 13px;
+  color: #6b5b52;
+  margin-bottom: 6px;
+}
+.pagamentos {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.opcao {
+  flex: 1;
+  padding: 10px;
+  border: 2px solid #d7b89f;
+  border-radius: 10px;
+  background: transparent;
+  cursor: pointer;
+  font-size: 14px;
+}
+.opcao.ativa {
+  border-color: #a3510f;
+  background: #fff;
+  color: #a3510f;
+  font-weight: 700;
+}
+
+.link {
+  display: block;
+  margin: 10px auto 0;
+  border: none;
+  background: none;
+  color: #a3510f;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.tabela {
+  overflow-x: auto;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+th {
+  text-align: left;
+  padding: 12px;
+  color: #6b5b52;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-bottom: 1px solid #eadfd3;
+}
+td {
+  padding: 12px;
+  border-bottom: 1px solid #f1e8df;
+}
+td .link {
+  display: inline;
+  margin: 0 0 0 8px;
+}
+
+.tag {
+  padding: 4px 10px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 700;
+}
+.tag.pago {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+.tag.pendente {
+  background: #fff3e0;
+  color: #e65100;
+}
+
+.vazio {
+  color: #8a7a70;
+}
+
+.aviso {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 10;
+  padding: 14px 20px;
+  border-radius: 12px;
+  background: #2e7d32;
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+.aviso.erro {
+  background: #c62828;
+}
+
+/* Celular / WebView: o pedido desce para baixo dos produtos */
+@media (max-width: 800px) {
+  .topo {
+    grid-template-columns: 1fr;
+  }
+  .pedido {
+    position: static;
+  }
+}
